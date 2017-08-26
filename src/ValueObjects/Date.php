@@ -2,8 +2,6 @@
 
 namespace bobkosse\eBoekhouden\ValueObjects;
 
-use bobkosse\eBoekhouden\Exceptions\DateException;
-
 /**
  * Class Date
  * @package bobkosse\eBoekhouden\ValueObjects

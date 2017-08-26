@@ -2,6 +2,7 @@
 namespace bobkosse\eBoekhouden;
 
 use bobkosse\eBoekhouden\ValueObjects\Date;
+use bobkosse\eBoekhouden\ValueObjects\InvoiceNumber;
 
 class eBoekhoudenConnect
 {
@@ -65,15 +66,21 @@ class eBoekhoudenConnect
 
     public function getInvoices($dateFrom, $toDate, $invoiceNumber = null, $relationCode = null)
     {
+
+        if(strlen($relationCode) > 15) {
+            throw new \Exception("RelationCode may have a string length of maximal 15 characters");
+        }
+
         try {
             $dateFrom = new Date($dateFrom);
             $toDate = new Date($toDate);
+            $invoiceNumber = new InvoiceNumber($invoiceNumber);
 
             $params = [
                 "SecurityCode2" => $this->securityCode2,
                 "SessionID" => $this->sessionId,
                 "cFilter" => [
-                    "Factuurnummer" => (string)$invoiceNumber,
+                    "Factuurnummer" => $invoiceNumber->__toString(),
                     "Relatiecode" => (string)$relationCode,
                     "DatumVan" => $dateFrom->__toString(),
                     "DatumTm" => $toDate->__toString()
