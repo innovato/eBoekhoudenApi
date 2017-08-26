@@ -3,7 +3,7 @@
 namespace bobkosse\eBoekhouden\ValueObjects;
 
 /**
- * Class Date
+ * Class InvoiceNumber
  * @package bobkosse\eBoekhouden\ValueObjects
  */
 class InvoiceNumber {
