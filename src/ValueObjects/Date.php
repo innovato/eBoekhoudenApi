@@ -30,6 +30,11 @@ class Date {
      */
     public function __construct($date)
     {
+        if($date === null || $date === "") {
+            $this->setError("Date is a required value", 100);
+            throw new \Exception($this->errorMessage, $this->errorCode);
+        }
+
         if($this->checkDateValues($date)){
             $this->date = $date;
             return;

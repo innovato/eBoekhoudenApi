@@ -38,4 +38,12 @@ class DateTest extends TestCase {
         };
         $this->assertException( $test, 'Exception', 101, 'DateFormat incorrect for value: 2017-02-30' );
     }
+
+    public function testEmptyDate()
+    {
+        $test = function() {
+            $date = new Date("");
+        };
+        $this->assertException( $test, 'Exception', 100, 'Date is a required value' );
+    }
 }
