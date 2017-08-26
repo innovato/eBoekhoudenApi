@@ -15,8 +15,14 @@ class Date {
      */
     private $date;
 
+    /**
+     * @var
+     */
     private $errorMessage;
 
+    /**
+     * @var
+     */
     private $errorCode;
 
     /**
@@ -79,6 +85,10 @@ class Date {
         return true;
     }
 
+    /**
+     * @param $message
+     * @param $code
+     */
     private function setError($message, $code)
     {
         $this->errorMessage = $message;
