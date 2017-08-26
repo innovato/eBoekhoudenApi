@@ -5,14 +5,34 @@ use bobkosse\eBoekhouden\ValueObjects\Date;
 use bobkosse\eBoekhouden\ValueObjects\InvoiceNumber;
 use bobkosse\eBoekhouden\ValueObjects\RelationCode;
 
+/**
+ * Class eBoekhoudenConnect
+ * @package bobkosse\eBoekhouden
+ */
 class eBoekhoudenConnect
 {
+    /**
+     * @var
+     */
     private $sessionId;
 
+    /**
+     * @var
+     */
     private $securityCode2;
 
+    /**
+     * @var \SoapClient
+     */
     private $soapClient;
 
+    /**
+     * eBoekhoudenConnect constructor.
+     * @param $username
+     * @param $securityCode1
+     * @param $securityCode2
+     * @throws \Exception
+     */
     public function __construct($username, $securityCode1, $securityCode2)
     {
         try {
@@ -33,6 +53,9 @@ class eBoekhoudenConnect
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function __destruct()
     {
         try {
@@ -45,26 +68,46 @@ class eBoekhoudenConnect
         }
     }
 
+    /**
+     *
+     */
     public function addInvoice()
     {
 
     }
 
+    /**
+     *
+     */
     public function addLedgerAccount()
     {
 
     }
 
+    /**
+     *
+     */
     public function addMutation()
     {
 
     }
 
+    /**
+     *
+     */
     public function addRelation()
     {
 
     }
 
+    /**
+     * @param $dateFrom
+     * @param $toDate
+     * @param null $invoiceNumber
+     * @param null $relationCode
+     * @return mixed
+     * @throws \Exception
+     */
     public function getInvoices($dateFrom, $toDate, $invoiceNumber = null, $relationCode = null)
     {
 
@@ -94,36 +137,58 @@ class eBoekhoudenConnect
         }
     }
 
+    /**
+     *
+     */
     public function getLedgerAccounts()
     {
 
     }
 
+    /**
+     *
+     */
     public function getMutations()
     {
 
     }
 
+    /**
+     *
+     */
     public function getVacantPosts()
     {
 
     }
 
+    /**
+     *
+     */
     public function getRelations()
     {
 
     }
 
+    /**
+     *
+     */
     public function updateLedgerAccount()
     {
 
     }
 
+    /**
+     *
+     */
     public function updateRelation()
     {
 
     }
 
+    /**
+     * @param $rawresponse
+     * @param $sub
+     */
     private function checkforerror($rawresponse, $sub)
     {
         if (isset($rawresponse->$sub->ErrorMsg->LastErrorCode)) {
