@@ -23,7 +23,7 @@ class AccountLedgerCodeTest extends TestCase {
         $this->assertNull($actual);
     }
 
-    public function testCorrectInvoiceNumber()
+    public function testCorrectAccountLedgerCode()
     {
         $accountLedgerCode = new AccountLedgerCode("123");
         $actual = $accountLedgerCode->__toString();

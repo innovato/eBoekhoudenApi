@@ -1,6 +1,7 @@
 <?php
 namespace bobkosse\eBoekhouden;
 
+use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCategory;
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCode;
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerId;
 use bobkosse\eBoekhouden\ValueObjects\AccountLegderId;
@@ -151,7 +152,7 @@ class eBoekhoudenConnect
         try {
             $id = new AccountLedgerId($id);
             $accountLedgerCode = new AccountLedgerCode($accountLedgerCode);
-            $category = ""; //$category;
+            $category = new AccountLedgerCategory($category);
 
             $params = [
                 "SecurityCode2" => $this->securityCode2,
@@ -159,7 +160,7 @@ class eBoekhoudenConnect
                 "cFilter" => [
                     "ID" => (string)$id->toInt(),
                     "Code" => $accountLedgerCode->__toString(),
-                    "Categorie" => $category
+                    "Categorie" => $category->__toString()
                 ]
             ];
 
