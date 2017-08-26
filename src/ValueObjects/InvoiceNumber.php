@@ -24,7 +24,7 @@ class InvoiceNumber {
             $this->invoiceNumber = $invoiceNumber;
             return;
         }
-        throw new \Exception("Invoicenumber may have a string length of maximal 50 characters", 104);
+        throw new \Exception("Invoice number may have a string length of maximal 50 characters", 104);
     }
 
     /**

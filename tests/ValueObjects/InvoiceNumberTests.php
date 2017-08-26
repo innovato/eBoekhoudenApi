@@ -12,7 +12,7 @@ class InvoiceNumberTests extends TestCase {
         $test = function() {
             $invoiceNumber = new InvoiceNumber("15TWL0a5HGBCfG20z1RPVrkhUhDSVTUz670e7ILrYWUyLy5LgT8");
         };
-        $this->assertException( $test, 'Exception', 104, 'Invoicenumber may have a string length of maximal 50 characters' );
+        $this->assertException( $test, 'Exception', 104, 'Invoice number may have a string length of maximal 50 characters' );
     }
 
     public function testNullInvoiceNumber()
