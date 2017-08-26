@@ -1,6 +1,7 @@
 <?php
 namespace bobkosse\eBoekhouden;
 
+use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCode;
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerId;
 use bobkosse\eBoekhouden\ValueObjects\AccountLegderId;
 use bobkosse\eBoekhouden\ValueObjects\Date;
@@ -139,13 +140,17 @@ class eBoekhoudenConnect
     }
 
     /**
-     *
+     * @param null $id
+     * @param null $accountLedgerCode
+     * @param null $category
+     * @return mixed
+     * @throws \Exception
      */
-    public function getLedgerAccounts($id = null, $code = null, $category = null)
+    public function getLedgerAccounts($id = null, $accountLedgerCode = null, $category = null)
     {
         try {
             $id = new AccountLedgerId($id);
-            $code = ""; //$code;
+            $accountLedgerCode = new AccountLedgerCode($accountLedgerCode);
             $category = ""; //$category;
 
             $params = [
@@ -153,7 +158,7 @@ class eBoekhoudenConnect
                 "SessionID" => $this->sessionId,
                 "cFilter" => [
                     "ID" => (string)$id->toInt(),
-                    "Code" => $code,
+                    "Code" => $accountLedgerCode->__toString(),
                     "Categorie" => $category
                 ]
             ];
