@@ -1,6 +1,8 @@
 <?php
 namespace bobkosse\eBoekhouden;
 
+use bobkosse\eBoekhouden\ValueObjects\AccountLedgerId;
+use bobkosse\eBoekhouden\ValueObjects\AccountLegderId;
 use bobkosse\eBoekhouden\ValueObjects\Date;
 use bobkosse\eBoekhouden\ValueObjects\InvoiceNumber;
 use bobkosse\eBoekhouden\ValueObjects\RelationCode;
@@ -110,7 +112,6 @@ class eBoekhoudenConnect
      */
     public function getInvoices($dateFrom, $toDate, $invoiceNumber = null, $relationCode = null)
     {
-
         try {
             $dateFrom = new Date($dateFrom);
             $toDate = new Date($toDate);
@@ -140,9 +141,30 @@ class eBoekhoudenConnect
     /**
      *
      */
-    public function getLedgerAccounts()
+    public function getLedgerAccounts($id = null, $code = null, $category = null)
     {
+        try {
+            $id = new AccountLedgerId($id);
+            $code = ""; //$code;
+            $category = ""; //$category;
 
+            $params = [
+                "SecurityCode2" => $this->securityCode2,
+                "SessionID" => $this->sessionId,
+                "cFilter" => [
+                    "ID" => (string)$id->toInt(),
+                    "Code" => $code,
+                    "Categorie" => $category
+                ]
+            ];
+
+            $response = $this->soapClient->__soapCall("GetGrootboekrekeningen", [$params]);
+
+            $this->checkforerror($response, "GetGrootboekrekeningenResult");
+            return $response->GetGrootboekrekeningenResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
     }
 
     /**
