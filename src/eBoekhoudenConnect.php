@@ -221,13 +221,16 @@ class eBoekhoudenConnect
 
     public function getMutationsByMutationsInRange($startMutationId, $endMutationId)
     {
+        $startMutationId = new MutationId($startMutationId);
+        $endMutationId = new MutationId($endMutationId);
+
         $params = [
             "SecurityCode2" => $this->securityCode2,
             "SessionID" => $this->sessionId,
             "cFilter" => [
                 "MutatieNr" => 0,
-                "MutatieNrVan" => $startMutationId,
-                "MutatieNrTm" => $endMutationId,
+                "MutatieNrVan" => $startMutationId->toInt(),
+                "MutatieNrTm" => $endMutationId->toInt(),
                 "Factuurnummer" => "",
                 "DatumVan" => "1980-01-01",
                 "DatumTm" => "2049-12-31"
