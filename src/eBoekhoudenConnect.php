@@ -238,6 +238,8 @@ class eBoekhoudenConnect
 
     public function getMutationsByMutationsByInvoiceNumber($invoiceNr)
     {
+        $invoiceNr = new InvoiceNumber($invoiceNr);
+
         $params = [
             "SecurityCode2" => $this->securityCode2,
             "SessionID" => $this->sessionId,
@@ -245,7 +247,7 @@ class eBoekhoudenConnect
                 "MutatieNr" => 0,
                 "MutatieNrVan" => "",
                 "MutatieNrTm" => "",
-                "Factuurnummer" => $invoiceNr,
+                "Factuurnummer" => $invoiceNr->__toString(),
                 "DatumVan" => "1980-01-01",
                 "DatumTm" => "2049-12-31"
             ]
