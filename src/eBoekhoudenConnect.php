@@ -288,11 +288,49 @@ class eBoekhoudenConnect
     }
 
     /**
-     *
+     * @return mixed
+     * @throws \Exception
      */
-    public function getVacantPosts()
+    public function getVacantPostsDebtors()
     {
 
+        try {
+            $params = [
+                "SecurityCode2" => $this->securityCode2,
+                "SessionID" => $this->sessionId,
+                "OpSoort" => "Debiteuren"
+            ];
+
+            $response = $this->soapClient->__soapCall("GetOpenPosten", [$params]);
+
+            $this->checkforerror($response, "GetOpenPostenResult");
+            return $response->GetOpenPostenResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
+    }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getVacantPostsCreditors()
+    {
+
+        try {
+            $params = [
+                "SecurityCode2" => $this->securityCode2,
+                "SessionID" => $this->sessionId,
+                "OpSoort" => "Crediteuren"
+            ];
+
+            $response = $this->soapClient->__soapCall("GetOpenPosten", [$params]);
+
+            $this->checkforerror($response, "GetOpenPostenResult");
+            return $response->GetOpenPostenResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
     }
 
     /**
