@@ -99,7 +99,9 @@ class eBoekhoudenConnect
     }
 
     /**
-     *
+     * @param Relation $relation
+     * @return mixed
+     * @throws \Exception
      */
     public function addRelation(Relation $relation)
     {
