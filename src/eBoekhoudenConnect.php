@@ -101,8 +101,22 @@ class eBoekhoudenConnect
     /**
      *
      */
-    public function addRelation()
+    public function addRelation(Relation $relation)
     {
+        try {
+            $params = [
+                "SecurityCode2" => $this->securityCode2,
+                "SessionID" => $this->sessionId,
+                "oRel" => $relation->getEboekhoudenArray()
+            ];
+
+            $response = $this->soapClient->__soapCall("AddRelatie", [$params]);
+
+            $this->checkforerror($response, "AddRelatieResult");
+            return $response->AddRelatieResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
 
     }
 
