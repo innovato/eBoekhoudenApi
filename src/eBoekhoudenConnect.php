@@ -3,8 +3,8 @@ namespace bobkosse\eBoekhouden;
 
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCategory;
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCode;
+use bobkosse\eBoekhouden\ValueObjects\AccountLedgerId;
 use bobkosse\eBoekhouden\ValueObjects\MutationId;
-use bobkosse\eBoekhouden\ValueObjects\AccountLegderId;
 use bobkosse\eBoekhouden\ValueObjects\Date;
 use bobkosse\eBoekhouden\ValueObjects\InvoiceNumber;
 use bobkosse\eBoekhouden\ValueObjects\RelationCode;
@@ -152,7 +152,7 @@ class eBoekhoudenConnect
     public function getLedgerAccounts($id = null, $accountLedgerCode = null, $category = null)
     {
         try {
-            $id = new MutationId($id);
+            $id = new AccountLedgerId($id);
             $accountLedgerCode = new AccountLedgerCode($accountLedgerCode);
             $category = new AccountLedgerCategory($category);
 
