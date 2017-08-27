@@ -173,12 +173,89 @@ class eBoekhoudenConnect
         }
     }
 
-    /**
-     *
-     */
-    public function getMutations()
+    public function getMutationsByPeriod($dateFrom, $toDate)
     {
+        $dateFrom = new Date($dateFrom);
+        $toDate = new Date($toDate);
 
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "MutatieNr" => 0,
+                "MutatieNrVan" => "",
+                "MutatieNrTm" => "",
+                "Factuurnummer" => "",
+                "DatumVan" => $dateFrom->__toString(),
+                "DatumTm" => $toDate->__toString()
+            ]
+        ];
+
+        return $this->performGetMutationsRequest($params);
+    }
+
+
+    public function getMutationsByMutationId($mutationId)
+    {
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "MutatieNr" => $mutationId,
+                "MutatieNrVan" => "",
+                "MutatieNrTm" => "",
+                "Factuurnummer" => "",
+                "DatumVan" => "1980-01-01",
+                "DatumTm" => "2049-12-31"
+            ]
+        ];
+        return $this->performGetMutationsRequest($params);
+    }
+
+    public function getMutationsByMutationsInRange($startMutationId, $endMutationId)
+    {
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "MutatieNr" => 0,
+                "MutatieNrVan" => $startMutationId,
+                "MutatieNrTm" => $endMutationId,
+                "Factuurnummer" => "",
+                "DatumVan" => "1980-01-01",
+                "DatumTm" => "2049-12-31"
+            ]
+        ];
+        return $this->performGetMutationsRequest($params);
+    }
+
+    public function getMutationsByMutationsByInvoiceNumber($invoiceNr)
+    {
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "MutatieNr" => 0,
+                "MutatieNrVan" => "",
+                "MutatieNrTm" => "",
+                "Factuurnummer" => $invoiceNr,
+                "DatumVan" => "1980-01-01",
+                "DatumTm" => "2049-12-31"
+            ]
+        ];
+        return $this->performGetMutationsRequest($params);
+    }
+
+    private function performGetMutationsRequest($params)
+    {
+        try {
+            $response = $this->soapClient->__soapCall("GetMutaties", [$params]);
+
+            $this->checkforerror($response, "GetMutatiesResult");
+            return $response->GetMutatiesResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
     }
 
     /**
