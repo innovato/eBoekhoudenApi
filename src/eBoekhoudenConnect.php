@@ -8,6 +8,8 @@ use bobkosse\eBoekhouden\ValueObjects\AccountLegderId;
 use bobkosse\eBoekhouden\ValueObjects\Date;
 use bobkosse\eBoekhouden\ValueObjects\InvoiceNumber;
 use bobkosse\eBoekhouden\ValueObjects\RelationCode;
+use bobkosse\eBoekhouden\ValueObjects\RelationId;
+use bobkosse\eBoekhouden\ValueObjects\RelationSearch;
 
 /**
  * Class eBoekhoudenConnect
@@ -336,9 +338,99 @@ class eBoekhoudenConnect
     /**
      *
      */
-    public function getRelations()
+    public function getAllRelations()
     {
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "Trefwoord" => "",
+                "Code" => "",
+                "ID" => ""
+            ]
+        ];
 
+        return $this->getRelations($params);
+    }
+
+    /**
+     * @param $relationId
+     * @return mixed
+     */
+    public function getRelationById($relationId)
+    {
+        $relationId = new RelationId($relationId);
+
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "Trefwoord" => "",
+                "Code" => "",
+                "ID" => $relationId->toInt()
+            ]
+        ];
+
+        return $this->getRelations($params);
+    }
+
+    /**
+     * @param $relationCode
+     * @return mixed
+     */
+    public function getRelationByCode($relationCode)
+    {
+        $relationCode = new RelationCode($relationCode);
+
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "Trefwoord" => "",
+                "Code" => $relationCode->__toString(),
+                "ID" => ""
+            ]
+        ];
+
+        return $this->getRelations($params);
+    }
+
+    /**
+     * @param $searchString
+     * @return mixed
+     */
+    public function getRelationBySearch($searchString)
+    {
+        $searchString = new RelationSearch($searchString);
+
+        $params = [
+            "SecurityCode2" => $this->securityCode2,
+            "SessionID" => $this->sessionId,
+            "cFilter" => [
+                "Trefwoord" => $searchString->__toString(),
+                "Code" => "",
+                "ID" => ""
+            ]
+        ];
+
+        return $this->getRelations($params);
+    }
+
+    /**
+     * @param $params
+     * @return mixed
+     * @throws \Exception
+     */
+    private function getRelations($params)
+    {
+        try {
+            $response = $this->soapClient->__soapCall("GetRelaties", [$params]);
+
+            $this->checkforerror($response, "GetRelatiesResult");
+            return $response->GetRelatiesResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
     }
 
     /**

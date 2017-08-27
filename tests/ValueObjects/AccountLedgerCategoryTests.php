@@ -3,7 +3,7 @@
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCategory;
 use PHPUnit\Framework\TestCase;
 
-class AccountLedgerCategoryTest extends TestCase {
+class AccountLedgerCategoryTests extends TestCase {
 
     use VladaHejda\AssertException;
 

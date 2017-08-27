@@ -30,4 +30,6 @@ After that you can use the class as described below:
 107: Account Ledger Code may not exceed the length of 10 characters or may be null \
 108: Account Ledger Category may not exceed the length of 10 characters or may be null \
 109: Mutation Id must be integer or null \
-110: 
+110: Relation Id must be integer \
+111: Relation search query may not exceed the length of 255 characters \
+112:
