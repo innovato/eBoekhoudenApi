@@ -14,7 +14,7 @@ class AccountLedgerId {
     private $accountLedgerId;
 
     /**
-     * InvoiceNumber constructor.
+     * AccountLedgerId constructor.
      * @param $accountLedgerId
      * @throws \Exception
      */

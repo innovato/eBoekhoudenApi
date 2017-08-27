@@ -15,13 +15,13 @@ class RelationId {
 
     /**
      * RelationId constructor.
-     * @param $relationid
+     * @param $relationId
      * @throws \Exception
      */
-    public function __construct($relationid = null)
+    public function __construct($relationId = null)
     {
-        if(is_int($relationid) || $relationid === null) {
-            $this->relationId = $relationid;
+        if(is_int($relationId) || $relationId === null) {
+            $this->relationId = $relationId;
             return;
         }
         throw new \Exception("Relation Id must be integer", 110);

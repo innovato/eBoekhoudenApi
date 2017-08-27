@@ -14,7 +14,7 @@ class MutationId {
     private $mutationId;
 
     /**
-     * InvoiceNumber constructor.
+     * MutationId constructor.
      * @param $mutationId
      * @throws \Exception
      */

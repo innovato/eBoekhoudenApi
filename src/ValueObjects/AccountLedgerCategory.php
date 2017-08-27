@@ -14,8 +14,8 @@ class AccountLedgerCategory {
     private $accountLedgerCategory;
 
     /**
-     * AccountLedgerCode constructor.
-     * @param $accountLedgerCode
+     * AccountLedgerCategory constructor.
+     * @param $accountLedgerCategory
      * @throws \Exception
      */
     public function __construct($accountLedgerCategory = null)
