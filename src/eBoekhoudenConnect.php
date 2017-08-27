@@ -199,7 +199,10 @@ class eBoekhoudenConnect
         return $this->performGetMutationsRequest($params);
     }
 
-
+    /**
+     * @param $mutationId
+     * @return mixed
+     */
     public function getMutationsByMutationId($mutationId)
     {
         $mutationId = new MutationId($mutationId);
@@ -219,6 +222,11 @@ class eBoekhoudenConnect
         return $this->performGetMutationsRequest($params);
     }
 
+    /**
+     * @param $startMutationId
+     * @param $endMutationId
+     * @return mixed
+     */
     public function getMutationsByMutationsInRange($startMutationId, $endMutationId)
     {
         $startMutationId = new MutationId($startMutationId);
@@ -239,6 +247,10 @@ class eBoekhoudenConnect
         return $this->performGetMutationsRequest($params);
     }
 
+    /**
+     * @param $invoiceNr
+     * @return mixed
+     */
     public function getMutationsByMutationsByInvoiceNumber($invoiceNr)
     {
         $invoiceNr = new InvoiceNumber($invoiceNr);
@@ -258,6 +270,11 @@ class eBoekhoudenConnect
         return $this->performGetMutationsRequest($params);
     }
 
+    /**
+     * @param $params
+     * @return mixed
+     * @throws \Exception
+     */
     private function performGetMutationsRequest($params)
     {
         try {
