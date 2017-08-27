@@ -3,7 +3,7 @@ namespace bobkosse\eBoekhouden;
 
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCategory;
 use bobkosse\eBoekhouden\ValueObjects\AccountLedgerCode;
-use bobkosse\eBoekhouden\ValueObjects\AccountLedgerId;
+use bobkosse\eBoekhouden\ValueObjects\MutationId;
 use bobkosse\eBoekhouden\ValueObjects\AccountLegderId;
 use bobkosse\eBoekhouden\ValueObjects\Date;
 use bobkosse\eBoekhouden\ValueObjects\InvoiceNumber;
@@ -150,7 +150,7 @@ class eBoekhoudenConnect
     public function getLedgerAccounts($id = null, $accountLedgerCode = null, $category = null)
     {
         try {
-            $id = new AccountLedgerId($id);
+            $id = new MutationId($id);
             $accountLedgerCode = new AccountLedgerCode($accountLedgerCode);
             $category = new AccountLedgerCategory($category);
 
@@ -173,6 +173,11 @@ class eBoekhoudenConnect
         }
     }
 
+    /**
+     * @param $dateFrom
+     * @param $toDate
+     * @return mixed
+     */
     public function getMutationsByPeriod($dateFrom, $toDate)
     {
         $dateFrom = new Date($dateFrom);
@@ -197,11 +202,13 @@ class eBoekhoudenConnect
 
     public function getMutationsByMutationId($mutationId)
     {
+        $mutationId = new MutationId($mutationId);
+
         $params = [
             "SecurityCode2" => $this->securityCode2,
             "SessionID" => $this->sessionId,
             "cFilter" => [
-                "MutatieNr" => $mutationId,
+                "MutatieNr" => $mutationId->toInt(),
                 "MutatieNrVan" => "",
                 "MutatieNrTm" => "",
                 "Factuurnummer" => "",
