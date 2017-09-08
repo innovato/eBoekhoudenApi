@@ -85,9 +85,22 @@ class eBoekhoudenConnect
     /**
      *
      */
-    public function addLedgerAccount()
+    public function addLedgerAccount(LedgerAccount $ledgerAccount)
     {
+        try {
+            $params = [
+                "SecurityCode2" => $this->securityCode2,
+                "SessionID" => $this->sessionId,
+                "oGb" => $ledgerAccount->getLedgerAccountArray()
+            ];
 
+            $response = $this->soapClient->__soapCall("AddGrootboekrekening", [$params]);
+
+            $this->checkforerror($response, "AddGrootboekrekeningResponse");
+            return $response->AddGrootboekrekeningResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
     }
 
     /**
@@ -119,7 +132,6 @@ class eBoekhoudenConnect
         } catch(\SoapFault $soapFault) {
             throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
         }
-
     }
 
     /**

@@ -6,7 +6,7 @@ namespace bobkosse\eBoekhouden\ObjectValidation;
  * Class RelationValidator
  * @package bobkosse\eBoekhouden\ObjectValidation
  */
-class RelationValidator
+class RelationValidator extends BaseValidator
 {
     /**
      *
@@ -109,26 +109,6 @@ class RelationValidator
         $acceptedvalues = ['M', 'm', 'V', 'v', ''];
         if(!in_array($this->sex, $acceptedvalues)) {
             throw new \Exception('Sex must be empty string, null, M or V', 112);
-        }
-    }
-
-    /**
-     * @param $fieldName
-     * @param $fieldValue
-     * @param $maxLenght
-     * @param bool $isRequired
-     * @throws \Exception
-     */
-    private function checkFieldLength($fieldName, $fieldValue, $maxLenght, $isRequired = false)
-    {
-        if(strlen($fieldValue) > $maxLenght) {
-            throw new \Exception('Field ' . $fieldName . ' may not exceed ' . $maxLenght . ' characters', 118);
-        }
-
-        if($isRequired) {
-            if ($fieldValue == '' || $fieldValue == null) {
-                throw new \Exception('Field ' . $fieldName . ' is a required field', 118);
-            }
         }
     }
 
