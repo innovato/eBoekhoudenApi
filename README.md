@@ -32,4 +32,11 @@ After that you can use the class as described below:
 109: Mutation Id must be integer or null \
 110: Relation Id must be integer \
 111: Relation search query may not exceed the length of 255 characters \
-112:
+112: Sex must be empty string, null, M or V \
+113: Field relationCode may not exceed 15 characters \
+114: Field companyName may not exceed 100 characters \
+115: Field contact may not exceed 100 characters \
+116: Field companyPerson may contain 'company' or 'person' only \
+117: Field address may not exceed 150 characters \
+118: Field postalcode may not exceed 50 characters \
+119: 
