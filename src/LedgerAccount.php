@@ -2,9 +2,7 @@
 
 namespace bobkosse\eBoekhouden;
 
-use bobkosse\eBoekhouden\ObjectValidation\LedgerAccountValidator;
-
-class LedgerAccount extends LedgerAccountValidator
+class LedgerAccount
 {
     protected $code;
     protected $description;
@@ -13,9 +11,13 @@ class LedgerAccount extends LedgerAccountValidator
     /**
      * @param mixed $code
      * @return LedgerAccount
+     * @throws \Exception
      */
     public function setCode($code)
     {
+        if(strlen($code) > 10) {
+            throw new \Exception('Code may not exceed the length of 10 characters');
+        }
         $this->code = $code;
         return $this;
     }
@@ -23,9 +25,13 @@ class LedgerAccount extends LedgerAccountValidator
     /**
      * @param mixed $description
      * @return LedgerAccount
+     * @throws \Exception
      */
     public function setDescription($description)
     {
+        if(strlen($description) > 50) {
+            throw new \Exception('Description may not exceed the length of 50 characters');
+        }
         $this->description = $description;
         return $this;
     }
@@ -33,19 +39,30 @@ class LedgerAccount extends LedgerAccountValidator
     /**
      * @param mixed $category
      * @return LedgerAccount
+     * @throws \Exception
      */
     public function setCategory($category)
     {
+        $acceptedvalues = ['BAL', 'VW'];
+
+        if(!in_array($category, $acceptedvalues)) {
+            throw new \Exception('Category must be BAL (Balance) or VW (Profit and Loss Account)');
+        }
         $this->category = $category;
         return $this;
     }
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function getLedgerAccountArray()
     {
-        $this->validateFields();
+        if($this->code == '' || $this->code == null
+            || $this->description == '' || $this->description ==  null
+            || $this->category == '' || $this->category ==  null) {
+            throw new \Exception('Code, Description and Category are mandatory fields');
+        }
 
         return [
             'ID' => '0',
