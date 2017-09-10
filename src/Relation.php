@@ -2,13 +2,11 @@
 
 namespace bobkosse\eBoekhouden;
 
-use bobkosse\eBoekhouden\ObjectValidation\RelationValidator;
-
 /**
  * Class Relation
  * @package bobkosse\eBoekhouden
  */
-class Relation extends RelationValidator
+class Relation
 {
     /**
      * @var
@@ -191,6 +189,9 @@ class Relation extends RelationValidator
      */
     public function setCreationDate($creationDate)
     {
+        if($creationDate === null || $creationDate === '') {
+            $this->creationDate = date("Y-m-d");
+        }
         $this->creationDate = $creationDate;
         return $this;
     }
@@ -231,6 +232,11 @@ class Relation extends RelationValidator
      */
     public function setSex($sex)
     {
+        $acceptedvalues = ['M', 'm', 'V', 'v', ''];
+        if(!in_array($sex, $acceptedvalues)) {
+            throw new \Exception('Sex must be empty string, null, M or V');
+        }
+
         $this->sex = $sex;
         return $this;
     }
@@ -238,9 +244,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $address
      * @return Relation
+     * @throws \Exception
      */
     public function setAddress($address)
     {
+        if(strlen($address) > 150) {
+            throw new \Exception('Address may not exceed the length of 150 characters');
+        }
         $this->address = $address;
         return $this;
     }
@@ -248,9 +258,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $postalcode
      * @return Relation
+     * @throws \Exception
      */
     public function setPostalcode($postalcode)
     {
+        if(strlen($postalcode) > 50) {
+            throw new \Exception('Postalcode may not exceed the length of 50 characters');
+        }
         $this->postalcode = $postalcode;
         return $this;
     }
@@ -258,9 +272,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $city
      * @return Relation
+     * @throws \Exception
      */
     public function setCity($city)
     {
+        if(strlen($city) > 50) {
+            throw new \Exception('City may not exceed the length of 50 characters');
+        }
         $this->city = $city;
         return $this;
     }
@@ -268,9 +286,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $country
      * @return Relation
+     * @throws \Exception
      */
     public function setCountry($country)
     {
+        if(strlen($country) > 50) {
+            throw new \Exception('Country may not exceed the length of 50 characters');
+        }
         $this->country = $country;
         return $this;
     }
@@ -278,9 +300,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $address2
      * @return Relation
+     * @throws \Exception
      */
     public function setAddress2($address2)
     {
+        if(strlen($address2) > 150) {
+            throw new \Exception('Address2 may not exceed the length of 150 characters');
+        }
         $this->address2 = $address2;
         return $this;
     }
@@ -288,9 +314,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $postalcode2
      * @return Relation
+     * @throws \Exception
      */
     public function setPostalcode2($postalcode2)
     {
+        if(strlen($postalcode2) > 50) {
+            throw new \Exception('Postalcode2 may not exceed the length of 50 characters');
+        }
         $this->postalcode2 = $postalcode2;
         return $this;
     }
@@ -298,9 +328,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $city2
      * @return Relation
+     * @throws \Exception
      */
     public function setCity2($city2)
     {
+        if(strlen($city2) > 50) {
+            throw new \Exception('City2 may not exceed the length of 50 characters');
+        }
         $this->city2 = $city2;
         return $this;
     }
@@ -308,9 +342,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $country2
      * @return Relation
+     * @throws \Exception
      */
     public function setCountry2($country2)
     {
+        if(strlen($country2) > 50) {
+            throw new \Exception('Country2 may not exceed the length of 50 characters');
+        }
         $this->country2 = $country2;
         return $this;
     }
@@ -318,9 +356,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $phone
      * @return Relation
+     * @throws \Exception
      */
     public function setPhone($phone)
     {
+        if(strlen($phone) > 50) {
+            throw new \Exception('Phone may not exceed the length of 50 characters');
+        }
         $this->phone = $phone;
         return $this;
     }
@@ -328,9 +370,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $mobile
      * @return Relation
+     * @throws \Exception
      */
     public function setMobile($mobile)
     {
+        if(strlen($mobile) > 50) {
+            throw new \Exception('Mobile may not exceed the length of 50 characters');
+        }
         $this->mobile = $mobile;
         return $this;
     }
@@ -338,9 +384,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $fax
      * @return Relation
+     * @throws \Exception
      */
     public function setFax($fax)
     {
+        if(strlen($fax) > 50) {
+            throw new \Exception('Fax may not exceed the length of 50 characters');
+        }
         $this->fax = $fax;
         return $this;
     }
@@ -348,9 +398,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $email
      * @return Relation
+     * @throws \Exception
      */
     public function setEmail($email)
     {
+        if(strlen($email) > 150) {
+            throw new \Exception('Email may not exceed the length of 150 characters');
+        }
         $this->email = $email;
         return $this;
     }
@@ -398,9 +452,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $vatregistrationnumber
      * @return Relation
+     * @throws \Exception
      */
     public function setVatregistrationnumber($vatregistrationnumber)
     {
+        if(strlen($vatregistrationnumber) > 50) {
+            throw new \Exception('vatregistrationnumber may not exceed the length of 50 characters');
+        }
         $this->vatregistrationnumber = $vatregistrationnumber;
         return $this;
     }
@@ -408,9 +466,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $preamble
      * @return Relation
+     * @throws \Exception
      */
     public function setPreamble($preamble)
     {
+        if(strlen($preamble) > 50) {
+            throw new \Exception('Preamble may not exceed the length of 50 characters');
+        }
         $this->preamble = $preamble;
         return $this;
     }
@@ -418,9 +480,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $iban
      * @return Relation
+     * @throws \Exception
      */
     public function setIban($iban)
     {
+        if(strlen($iban) > 50) {
+            throw new \Exception('IBAN may not exceed the length of 50 characters');
+        }
         $this->iban = $iban;
         return $this;
     }
@@ -428,9 +494,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $bic
      * @return Relation
+     * @throws \Exception
      */
     public function setBic($bic)
     {
+        if(strlen($bic) > 50) {
+            throw new \Exception('BIC may not exceed the length of 50 characters');
+        }
         $this->bic = $bic;
         return $this;
     }
@@ -438,19 +508,30 @@ class Relation extends RelationValidator
     /**
      * @param mixed $companyPerson
      * @return Relation
+     * @throws \Exception
      */
     public function setCompanyPerson($companyPerson)
     {
-        $this->companyPerson = $companyPerson;
-        return $this;
+        $acceptedValues = ['P', 'C'];
+
+        if(in_array($companyPerson, $acceptedValues)) {
+            $this->companyPerson = $companyPerson;
+            return $this;
+        }
+
+        throw new \Exception('CompanyPerson may only have the values P (for Person) or C (for Company)');
     }
 
     /**
      * @param mixed $freeField_1
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField1($freeField_1)
     {
+        if(strlen($freeField_1) > 100) {
+            throw new \Exception('FreeField1 may not exceed the length of 100 characters');
+        }
         $this->freeField_1 = $freeField_1;
         return $this;
     }
@@ -458,9 +539,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_2
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField2($freeField_2)
     {
+        if(strlen($freeField_2) > 100) {
+            throw new \Exception('FreeField2 may not exceed the length of 100 characters');
+        }
         $this->freeField_2 = $freeField_2;
         return $this;
     }
@@ -468,9 +553,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_3
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField3($freeField_3)
     {
+        if(strlen($freeField_3) > 100) {
+            throw new \Exception('FreeField3 may not exceed the length of 100 characters');
+        }
         $this->freeField_3 = $freeField_3;
         return $this;
     }
@@ -478,9 +567,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_4
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField4($freeField_4)
     {
+        if(strlen($freeField_4) > 100) {
+            throw new \Exception('FreeField4 may not exceed the length of 100 characters');
+        }
         $this->freeField_4 = $freeField_4;
         return $this;
     }
@@ -488,9 +581,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_5
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField5($freeField_5)
     {
+        if(strlen($freeField_5) > 100) {
+            throw new \Exception('FreeField5 may not exceed the length of 100 characters');
+        }
         $this->freeField_5 = $freeField_5;
         return $this;
     }
@@ -498,9 +595,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_6
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField6($freeField_6)
     {
+        if(strlen($freeField_6) > 100) {
+            throw new \Exception('FreeField6 may not exceed the length of 100 characters');
+        }
         $this->freeField_6 = $freeField_6;
         return $this;
     }
@@ -508,9 +609,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_7
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField7($freeField_7)
     {
+        if(strlen($freeField_7) > 100) {
+            throw new \Exception('FreeField7 may not exceed the length of 100 characters');
+        }
         $this->freeField_7 = $freeField_7;
         return $this;
     }
@@ -518,9 +623,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_8
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField8($freeField_8)
     {
+        if(strlen($freeField_8) > 100) {
+            throw new \Exception('FreeField8 may not exceed the length of 100 characters');
+        }
         $this->freeField_8 = $freeField_8;
         return $this;
     }
@@ -528,9 +637,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_9
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField9($freeField_9)
     {
+        if(strlen($freeField_9) > 100) {
+            throw new \Exception('FreeField9 may not exceed the length of 100 characters');
+        }
         $this->freeField_9 = $freeField_9;
         return $this;
     }
@@ -538,9 +651,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $freeField_10
      * @return Relation
+     * @throws \Exception
      */
     public function setFreeField10($freeField_10)
     {
+        if(strlen($freeField_10) > 100) {
+            throw new \Exception('FreeField10 may not exceed the length of 100 characters');
+        }
         $this->freeField_10 = $freeField_10;
         return $this;
     }
@@ -558,9 +675,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $ledgerAccount_id
      * @return Relation
+     * @throws \Exception
      */
     public function setLedgerAccountId($ledgerAccount_id)
     {
+        if(strlen($ledgerAccount_id) > 100) {
+            throw new \Exception('LedgerAccountId may not exceed the length of 100 characters');
+        }
         $this->ledgerAccount_id = $ledgerAccount_id;
         return $this;
     }
@@ -568,9 +689,13 @@ class Relation extends RelationValidator
     /**
      * @param mixed $noEmail
      * @return Relation
+     * @throws \Exception
      */
     public function setNoEmail($noEmail)
     {
+        if(strlen($noEmail) > 100) {
+            throw new \Exception('NoEmail may not exceed the length of 100 characters');
+        }
         $this->noEmail = $noEmail;
         return $this;
     }
@@ -578,19 +703,66 @@ class Relation extends RelationValidator
     /**
      * @param mixed $newsletterGroupCount
      * @return Relation
+     * @throws \Exception
      */
     public function setNewsletterGroupCount($newsletterGroupCount)
     {
+        if(strlen($newsletterGroupCount) > 100) {
+            throw new \Exception('NewsLetterGroupCount may not exceed the length of 100 characters');
+        }
         $this->newsletterGroupCount = $newsletterGroupCount;
         return $this;
     }
 
     /**
+     *
+     */
+    private function checkCompanyName()
+    {
+        if($this->companyName === null || $this->companyName === '') {
+            if($this->companyPerson === 'person') {
+                $this->companyName = $this->contact;
+            } else {
+                $this->companyName = "UNKNOWN";
+            }
+        }
+
+        if(strlen($this->companyName) > 100) {
+            throw new \Exception('companyName may not exceed the length of 100 characters');
+        }
+    }
+
+    /**
+     *
+     */
+    private function checkRelationCode()
+    {
+        if($this->relationCode === null || $this->relationCode === '') {
+            $this->relationCode = substr($this->companyName, 0, 8) . date('mY');
+        }
+
+        if(strlen($this->relationCode) > 15) {
+            throw new \Exception('relationCode may not exceed the length of 15 characters');
+        }
+    }
+
+    /**
      * @return array
+     * @throws \Exception
      */
     public function getEboekhoudenArray()
     {
-        $this->validateFields();
+        $this->checkCompanyName();
+        $this->checkRelationCode();
+
+        if($this->ledgerAccount_id == '' || $this->ledgerAccount_id == null
+            || $this->noEmail == '' || $this->noEmail ==  null
+            || $this->newsletterGroupCount == '' || $this->newsletterGroupCount == null
+            || $this->id == '' || $this->id == null
+            || $this->creationDate == '' || $this->creationDate == null) {
+
+            throw new \Exception('ID, CreationDate, LedgerAccountId, NoEmail and NewLetterGroupCount are mandatory fields');
+        }
 
         return [
             "ID" => $this->id,
