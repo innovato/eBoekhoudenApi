@@ -5,6 +5,7 @@ namespace bobkosse\eBoekhouden;
 /**
  * Class Relation
  * @package bobkosse\eBoekhouden
+ * @todo Use ValueObject where possible
  */
 class Relation
 {

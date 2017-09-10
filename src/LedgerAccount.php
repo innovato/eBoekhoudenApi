@@ -2,10 +2,24 @@
 
 namespace bobkosse\eBoekhouden;
 
+/**
+ * Class LedgerAccount
+ * @package bobkosse\eBoekhouden
+ * @todo Use ValueObject where possible
+ */
 class LedgerAccount
 {
+    /**
+     * @var
+     */
     protected $code;
+    /**
+     * @var
+     */
     protected $description;
+    /**
+     * @var
+     */
     protected $category;
 
     /**

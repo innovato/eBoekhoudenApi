@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bobkosse
- * Date: 09-09-17
- * Time: 13:58
- */
 
 namespace bobkosse\eBoekhouden;
 
 /**
  * Class Mutation
  * @package bobkosse\eBoekhouden
+ * @todo Use ValueObject where possible
  */
 class Mutation
 {
