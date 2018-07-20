@@ -1,5 +1,5 @@
 {
-    "name": "innovato/eBoekhouden",
+    "name": "innovato/eboekhouden",
     "description": "PHP Wrapper for eBoekhouden SOAP server. Fork of bobkosse/eBoekhouden",
     "type": "library",
     "minimum-stability": "stable",
