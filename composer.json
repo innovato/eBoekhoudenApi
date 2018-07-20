@@ -1,14 +1,8 @@
 {
-    "name": "bobkosse/eBoekhouden",
-    "description": "PHP Wrapper for eBoekhouden SOAP server",
+    "name": "innovato/eBoekhouden",
+    "description": "PHP Wrapper for eBoekhouden SOAP server. Fork of bobkosse/eBoekhouden",
     "type": "library",
-    "authors": [
-        {
-            "name": "Bob Kosse",
-            "email": "bob@bobkosse.nl"
-        }
-    ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=7.0.0",
         "vladahejda/phpunit-assert-exception": "dev-master"
@@ -18,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "bobkosse\\eBoekhouden\\": "src"
+            "innovato\\eBoekhouden\\": "src"
         }
     }
 }
