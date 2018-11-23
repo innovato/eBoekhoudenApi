@@ -59,7 +59,7 @@ $mutation->setMutationLines([
         'BedragExclBTW' => 100,
         'BedragBTW' => 21,
         'BedragInclBTW' => 121,
-        'BTWCode' => $this->btwCode,
+        'BTWCode' => 'HOOG_VERK_21', // Check documentation chapter 4
         'BTWPercentage' => 21,
         'TegenrekeningCode' => 1000,
     ]
