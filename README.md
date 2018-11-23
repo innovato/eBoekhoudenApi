@@ -38,9 +38,9 @@ Here are some usage examples.
 
 #### Find mutation
 ```
-$mutation = $eBoekhouden->getMutationsByMutationsByInvoiceNumber($invoice_number);
+$mutation = $eBoekhouden->getMutationsByMutationsByInvoiceNumber($invoiceNumber);
 if (isset($mutation->Mutaties->cMutatieList)) {
-    // Mutation with $invoice_number exists
+    // Mutation with $invoiceNumber exists
 }
 ```
 #### Add new mutation
