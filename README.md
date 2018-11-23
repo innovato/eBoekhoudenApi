@@ -39,7 +39,7 @@ Here are some usage examples.
 #### Find mutation
 ```
 $mutation = $eBoekhouden->getMutationsByMutationsByInvoiceNumber($invoice_number);
-if (!isset($mutation->Mutaties->cMutatieList)) {
+if (isset($mutation->Mutaties->cMutatieList)) {
     // Mutation with $invoice_number exists
 }
 ```
