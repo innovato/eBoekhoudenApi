@@ -756,8 +756,12 @@ class Relation
         $this->checkCompanyName();
         $this->checkRelationCode();
 
-        if($this->relationCode == '' || $this->companyName == '') {
-            throw new \Exception('RelationCode and CompanyName are mandatory fields.');
+        if($this->ledgerAccount_id == '' || $this->ledgerAccount_id == null
+            || $this->noEmail == '' || $this->noEmail ==  null
+            || $this->newsletterGroupCount == '' || $this->newsletterGroupCount == null
+            || $this->id == '' || $this->id == null
+            || $this->creationDate == '' || $this->creationDate == null) {
+             throw new \Exception('ID, CreationDate, LedgerAccountId, NoEmail and NewLetterGroupCount are mandatory fields');
         }
 
         return [
