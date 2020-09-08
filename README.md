@@ -1,9 +1,18 @@
 # PHP Wrapper for eBoekhouden SOAP server
 
-This package makes it easy to connect to your eBoekhouden Accounting system.
+This is forked project. Much of the work has been done by the original authors and contributors.
+
+## Disclaimer
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
 
 ## API Documentation
-The implementation is based on version 4.9 of the SOAP documentation found here: 
+The implementation is based on the E-Boekhouden SOAP documentation found here: 
 https://secure.e-boekhouden.nl/handleiding/Documentatie_soap.pdf
 
 ## Setup
@@ -14,7 +23,7 @@ Call the eBoekhoudenConnect class as follow:
 ```$eBoekhouden = new eBoekhoudenConnect("Username", "SecurityCode1", "SecurityCode2");```
 
 ## Usage
-After that you can use the class as described below:
+After the setup, you can use the class as described below.
 
 ### Relations
 Here are some usage examples.

@@ -92,7 +92,7 @@ class Relation
     /**
      * @var
      */
-    protected $bankacocunt;
+    protected $bankaccount;
     /**
      * @var
      */
@@ -431,12 +431,12 @@ class Relation
     }
 
     /**
-     * @param mixed $bankacocunt
+     * @param mixed $bankaccount
      * @return Relation
      */
-    public function setBankacocunt($bankacocunt)
+    public function setBankaccount($bankaccount)
     {
-        $this->bankacocunt = $bankacocunt;
+        $this->bankaccount = $bankaccount;
         return $this;
     }
 
@@ -513,14 +513,20 @@ class Relation
      */
     public function setCompanyPerson($companyPerson)
     {
-        $acceptedValues = ['P', 'C'];
+        // In old versions of this library, company was specified as 'C', but according to the API, it must be 'B'.
+        // 'C' was accepted by the API, but not processed.
+        // Auto-correct the specified character to prevent exceptions.
+        if ($companyPerson === 'C') {
+            $companyPerson = 'B';
+        }
+        $acceptedValues = ['P', 'B'];
 
         if(in_array($companyPerson, $acceptedValues)) {
             $this->companyPerson = $companyPerson;
             return $this;
         }
 
-        throw new \Exception('CompanyPerson may only have the values P (for Person) or C (for Company)');
+        throw new \Exception('CompanyPerson may only have the values P (for Person) or B (for Company)');
     }
 
     /**
@@ -785,7 +791,7 @@ class Relation
             "Email" => $this->email,
             "Site" => $this->website,
             "Notitie" => $this->note,
-            "Bankrekening" => $this->bankacocunt,
+            "Bankrekening" => $this->bankaccount,
             "Girorekening" => $this->giroaccount,
             "BTWNummer" => $this->vatregistrationnumber,
             "Aanhef" => $this->preamble,

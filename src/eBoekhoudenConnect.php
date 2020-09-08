@@ -485,9 +485,39 @@ class eBoekhoudenConnect
     /**
      *
      */
-    public function updateRelation()
+    public function updateRelation($relation)
     {
+        try {
+            $newRel = $relation->getEboekhoudenArray();
+            $relations = $this->getRelationByCode($newRel['Code']);
+            if (!isset($relations->Relaties->cRelatie)) {
+                throw new \Exception('Relation does not exist.');
+            }
+            $currentRel = (array) $relations->Relaties->cRelatie;
 
+            // Go through the new relation values and add everything to the current relation array which has been filled in.
+            // Preserve all other fields.
+            foreach ($newRel as $newRelKey => $newRelVal) {
+                if (!empty($newRelVal) && $newRelKey !== 'ID' && $newRelKey !== 'Code' && $newRelVal !== 'UNKNOWN') {
+                    if (array_key_exists($newRelKey, $currentRel)) {
+                        $currentRel[$newRelKey] = $newRelVal;
+                    }
+                }
+            }
+
+            $params = [
+                "SecurityCode2" => $this->securityCode2,
+                "SessionID" => $this->sessionId,
+                "oRel" => $currentRel
+            ];
+
+            $response = $this->soapClient->__soapCall("UpdateRelatie", [$params]);
+
+            $this->checkforerror($response, "UpdateRelatieResult");
+            return $response->UpdateRelatieResult;
+        } catch(\SoapFault $soapFault) {
+            throw new \Exception('<strong>Soap Exception:</strong> ' . $soapFault);
+        }
     }
 
     /**
